@@ -17,32 +17,32 @@ routes.get('/', function (req, res) {
     if (req.session.loggedin) {
         res.send(`
             <h1>Welcome ${req.session.username}</h1>
-            <form action="/logout" method="get">
+            <form action="/user/logout" method="get">
                 <button type="submit">Logout</button>
             </form>
-            <form action="/profile" method="get">
+            <form action="/user/profile" method="get">
                 <button type="submit">Profile</button>
             </form>
         `);
     }else{
-        return res.redirect('/login');
+        return res.redirect('/user/login');
     }
 })
 
 
 
-routes.get('/register', get_register);
-routes.get('/login', get_login);
+routes.get('/user/register', get_register);
+routes.get('/user/login', get_login);
 
 
-routes.post('/register', register);
-routes.post('/login', login);
+routes.post('/auth/register', register);
+routes.post('/auth/login', login);
 
-routes.get('/profile', requireLogin, profile);
+routes.get('/user/profile', requireLogin, profile);
 
-routes.get('/change-password', requireLogin, click_change_password);
-routes.post('/change-password', requireLogin, change_password);
+routes.get('/user/change-password', requireLogin, click_change_password);
+routes.post('/auth/change-password', requireLogin, change_password);
 
-routes.get('/logout', requireLogin, logout);
+routes.get('/user/logout', requireLogin, logout);
 
 module.exports = routes;

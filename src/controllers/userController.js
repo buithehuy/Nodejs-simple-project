@@ -18,10 +18,10 @@ const profile = (req, res) => {
                 <p>id: ${results[0].id}</p>
                 <p>username: ${results[0].username}</p>
                 <p>created_at: ${results[0].created_at}</p>
-                <form action="/logout" method="get">
+                <form action="/user/logout" method="get">
                     <button type="submit">Logout</button>
                 </form>
-                <form action="/change-password" method="get">
+                <form action="/user/change-password" method="get">
                     <button type="submit">Change Password</button>
                 </form>
             `);
@@ -46,7 +46,7 @@ const change_password = (req, res) => {
 const click_change_password = (req, res) => {
     res.send(`
         <h1>Change Password</h1>
-        <form action="/change-password" method="post">
+        <form action="/auth/change-password" method="post">
             <input type="password" name="password" placeholder="password" required><br>
             <button type="submit">Change Password</button>
         </form>

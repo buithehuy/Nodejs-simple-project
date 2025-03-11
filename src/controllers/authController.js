@@ -51,14 +51,14 @@ const login = (req, res) => {
 const get_register = (req, res) => {
     res.send(`
     <h1>Register</h1>
-    <form action="/register" method="post">
+    <form action="/auth/register" method="post">
       <input type="text" name="username" placeholder="username" required><br>
       <input type="password" name="password" placeholder="password" required><br>
       <button type="submit">Register</button>
     </form>
     <form>
     <h2>Already have an account?</h2>
-    <a href="/login">Login</a>
+    <a href="/user/login">Login</a>
     </form>
 
   `);
@@ -67,14 +67,14 @@ const get_register = (req, res) => {
 const get_login = function (req, res) {
     res.send(`
     <h1>Login</h1>
-    <form action="/login" method="post">
+    <form action="/auth/login" method="post">
       <input type="text" name="username" placeholder="username" required><br>
       <input type="password" name="password" placeholder="password" required><br>
       <button type="submit">Login</button>
     </form>
     <form>
     <h2>Don't have an account?</h2>
-    <a href="/register">Register</a>
+    <a href="/user/register">Register</a>
     </form>
   `);
  }
