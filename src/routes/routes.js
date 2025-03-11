@@ -14,17 +14,21 @@ const requireLogin = (req, res, next) => {
 
 
 routes.get('/', function (req, res) {
-  res.send(`
-  <h1>Hello</h1>
-  <form action="/register" method="get">
-    <button type="submit">Register</button>
-  </form>
-  
-  <form action="/login" method="get">
-    <button type="submit">Login</button>
-  </form>
-`);
+    if (req.session.loggedin) {
+        res.send(`
+            <h1>Welcome ${req.session.username}</h1>
+            <form action="/logout" method="get">
+                <button type="submit">Logout</button>
+            </form>
+            <form action="/profile" method="get">
+                <button type="submit">Profile</button>
+            </form>
+        `);
+    }else{
+        return res.redirect('/login');
+    }
 })
+
 
 
 routes.get('/register', get_register);

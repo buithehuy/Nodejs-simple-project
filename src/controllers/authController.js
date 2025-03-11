@@ -43,7 +43,7 @@ const login = (req, res) => {
         req.session.username = username;
         req.session.userId = result[0].id;
         
-        res.redirect('/profile');
+        res.redirect('/');
         
     });
 };
@@ -56,6 +56,11 @@ const get_register = (req, res) => {
       <input type="password" name="password" placeholder="password" required><br>
       <button type="submit">Register</button>
     </form>
+    <form>
+    <h2>Already have an account?</h2>
+    <a href="/login">Login</a>
+    </form>
+
   `);
  }
 
@@ -66,6 +71,10 @@ const get_login = function (req, res) {
       <input type="text" name="username" placeholder="username" required><br>
       <input type="password" name="password" placeholder="password" required><br>
       <button type="submit">Login</button>
+    </form>
+    <form>
+    <h2>Don't have an account?</h2>
+    <a href="/register">Register</a>
     </form>
   `);
  }
