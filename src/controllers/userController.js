@@ -43,7 +43,7 @@ const change_password = (req, res) => {
     });
 };
 
-const get_change_password = (req, res) => {
+const click_change_password = (req, res) => {
     res.send(`
         <h1>Change Password</h1>
         <form action="/change-password" method="post">
@@ -60,5 +60,5 @@ const logout = (req, res) => {
 
 
     module.exports = {
-        profile, change_password, get_change_password, logout
+        profile, change_password, click_change_password, logout
     };

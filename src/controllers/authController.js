@@ -1,4 +1,3 @@
-const { get } = require('..');
 const connection = require('../config/db');
 
 const register = (req, res) => {
