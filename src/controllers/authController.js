@@ -1,3 +1,4 @@
+const { get } = require('..');
 const connection = require('../config/db');
 
 const register = (req, res) => {
@@ -48,7 +49,29 @@ const login = (req, res) => {
     });
 };
 
+const get_register = (req, res) => {
+    res.send(`
+    <h1>Register</h1>
+    <form action="/register" method="post">
+      <input type="text" name="username" placeholder="username" required><br>
+      <input type="password" name="password" placeholder="password" required><br>
+      <button type="submit">Register</button>
+    </form>
+  `);
+ }
+
+const get_login = function (req, res) {
+    res.send(`
+    <h1>Login</h1>
+    <form action="/login" method="post">
+      <input type="text" name="username" placeholder="username" required><br>
+      <input type="password" name="password" placeholder="password" required><br>
+      <button type="submit">Login</button>
+    </form>
+  `);
+ }
+
 
 module.exports = {
-    register, login
+    register, login, get_register, get_login
 };

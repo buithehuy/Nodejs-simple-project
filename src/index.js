@@ -1,6 +1,7 @@
 
 const express = require('express');
-const { register, login } = require('./controllers/authController');
+const { register, login, get_register, get_login } = require('./controllers/authController');
+const { profile, change_password, get_change_password } = require('./controllers/userController');
 
 const connection = require('./config/db');
 
@@ -46,86 +47,18 @@ app.get('/', function (req, res) {
 })
 
 
-app.get('/register', function (req, res) {
-    res.send(`
-    <h1>Register</h1>
-    <form action="/register" method="post">
-      <input type="text" name="username" placeholder="username" required><br>
-      <input type="password" name="password" placeholder="password" required><br>
-      <button type="submit">Register</button>
-    </form>
-  `);
- }
-)
+app.get('/register', get_register);
+app.get('/login', get_login);
 
-app.get('/login', function (req, res) {
-    res.send(`
-    <h1>Login</h1>
-    <form action="/login" method="post">
-      <input type="text" name="username" placeholder="username" required><br>
-      <input type="password" name="password" placeholder="password" required><br>
-      <button type="submit">Login</button>
-    </form>
-  `);
- }
-)
 
 app.post('/register', register);
-
 app.post('/login', login);
 
-app.get('/profile', requireLogin, (req, res) => {
-    connection.query(
-      'SELECT id, username, created_at FROM users WHERE id = ?',
-      [req.session.userId],
-      (err, results) => {
-        if (err) {
-          return res.status(500).json({ success: false, message: 'database err' });
-        }
-        
-        if (results.length === 0) {
-          return res.status(404).json({ success: false, message: 'no user' });
-        }
-        
-        res.send(`
-          <h1>Profile</h1>
-          <p>id: ${results[0].id}</p>
-          <p>username: ${results[0].username}</p>
-          <p>created_at: ${results[0].created_at}</p>
-          <form action="/logout" method="get">
-            <button type="submit">Logout</button>
-          </form>
-          <form action="/change-password" method="get">
-            <button type="submit">Change Password</button>
-          </form>
-        `);
-      }
-    );
-  });
+app.get('/profile', requireLogin, profile);
 
-app.get('/change-password', requireLogin, (req, res) => {
-    res.send(`
-    <h1>Change Password</h1>
-    <form action="/change-password" method="post">
-      <input type="password" name="password" placeholder="password" required><br>
-      <button type="submit">Change Password</button>
-    </form>
-  `);
-});
+app.get('/change-password', requireLogin, get_change_password);
+app.post('/change-password', requireLogin, change_password);
 
-app.post('/change-password', requireLogin, (req, res) => {
-    const {password} = req.body;
-    if(!password) {
-        return res.status(400).json({ success: false, message: 'fill full form' });
-    }
-
-    connection.query('UPDATE users SET password = ? WHERE id = ?', [password, req.session.userId], (err, result) => {
-        if (err) {
-            return res.status(500).json({ success: false, message: 'database err' });
-        }
-        res.status(200).json({ success: true, message: 'success' });
-    });
-});
 
 
 app.get('/logout', requireLogin, (req, res) => {
