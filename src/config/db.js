@@ -17,9 +17,13 @@ connection.connect((err) => {
   const creatTable = `
   CREATE TABLE IF NOT EXISTS users (
     id int AUTO_INCREMENT PRIMARY KEY,
-    username varchar(255),
-    password varchar(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    username VARCHAR(255),
+    password VARCHAR(255),
+    email VARCHAR(255),
+    role VARCHAR(255) DEFAULT 'user',
+    active BOOLEAN DEFAULT false,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     
   )`;
 
