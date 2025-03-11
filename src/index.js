@@ -1,7 +1,7 @@
 
 const express = require('express');
 const { register, login, get_register, get_login } = require('./controllers/authController');
-const { profile, change_password, get_change_password } = require('./controllers/userController');
+const { profile, change_password, get_change_password, logout } = require('./controllers/userController');
 
 const connection = require('./config/db');
 
@@ -59,12 +59,7 @@ app.get('/profile', requireLogin, profile);
 app.get('/change-password', requireLogin, get_change_password);
 app.post('/change-password', requireLogin, change_password);
 
-
-
-app.get('/logout', requireLogin, (req, res) => {
-    req.session.destroy();
-    res.redirect("/");
-});
+app.get('/logout', requireLogin, logout);
 
 
 module.exports = app;

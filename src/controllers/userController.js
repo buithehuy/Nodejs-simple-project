@@ -53,7 +53,12 @@ const get_change_password = (req, res) => {
     `);
 }
 
+const logout = (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+}
+
 
     module.exports = {
-        profile, change_password, get_change_password
+        profile, change_password, get_change_password, logout
     };
