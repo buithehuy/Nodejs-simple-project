@@ -34,6 +34,10 @@ const login = async (req, res) => {
     if (!isMatch) {
         return res.status(401).json({ success: false, message: 'username or password is incorrect' });
     }
+    
+    if (user.role === 'admin') {
+        req.session.isAdmin = true;
+    }
 
     req.session.loggedin = true;
     req.session.username = username;

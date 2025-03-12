@@ -19,9 +19,6 @@ const profile = async (req, res) => {
             <p>id: ${user.id}</p>
             <p>username: ${user.username}</p>
             <p>created_at: ${user.created_at}</p>
-            <form action="/user/logout" method="get">
-                <button type="submit">Logout</button>
-            </form>
             <form action="/user/change-password" method="get">
                 <button type="submit">Change Password</button>
             </form>
