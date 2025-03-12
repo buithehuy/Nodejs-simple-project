@@ -1,13 +1,15 @@
 const mysql = require('mysql2');
 
-const connection = mysql.createConnection({
+const connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'huysql2004', 
     database: 'db1' 
-  });
+  }).promise();
 
-connection.connect((err) => {
+
+
+connection.getConnection((err) => {
   if (err) {
     console.error('MySQL connect error', err);
     return;
@@ -27,7 +29,7 @@ connection.connect((err) => {
     
   )`;
 
-  connection.query(creatTable, (err) => {
+  connection.execute(creatTable, (err) => {
     if (err) throw err;
   });
 });

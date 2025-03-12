@@ -1,51 +1,47 @@
 const connection = require('../config/db');
+const bcrypt = require('bcrypt');
 
-const register = (req, res) => {
-    const {username, password} = req.body;
-    if(!username||!password) {
-        return res.status(400).json({ success: false, message: 'fill full form' });
-    }
+const register = async (req, res) => {
+    try {
+        console.log('Registering user...');
+        const {username, password} = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const [users] = await connection.execute('SELECT * FROM users WHERE username = ?', [username]);
 
-    connection.query('SELECT * FROM users WHERE username = ?', [username], (err, result) => {
-        if (err) {
-            return res.status(500).json({ success: false, message: 'database err' });
-        }
-
-        if (result.length > 0) {
+        if (users.length > 0) {
             return res.status(409).json({ success: false, message: 'exist user' });
         }
 
-        connection.query('INSERT INTO users (username, password) VALUE (?, ?)', [username, password], (err, result) => {
-            if (err) {
-                return res.status(500).json({ success: false, message: 'database err' });
-            }
-            return res.status(201).json({ success: true, message: 'sucess' });
-        })
-    })
+        await connection.execute('INSERT INTO users (username, password) VALUE (?, ?)', [username, hashedPassword]);
+        res.status(201).json({ success: true, message: 'sucess' });
+
+    } catch (err) {
+        console.error('Database error:', err);
+        return res.status(500).json({ success: false, message: 'database err' });
+    }
 };
 
-const login = (req, res) => {
+const login = async (req, res) => {
     const {username, password} = req.body;
-    if(!username || !password) {
-        return res.status(400).json({success: false, message: 'fill full form'});
+    const [users] = await connection.execute('SELECT * FROM users WHERE username = ?', [username]);
+    const user = users[0];
+
+    if (!user) {
+        return res.status(401).json({ success: false, message: 'username or password is incorrect' });
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+        return res.status(401).json({ success: false, message: 'username or password is incorrect' });
     }
 
-    connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], (err, result) => {
-        if (err) {
-            return res.status(500).json({ success: false, message: 'database err' });
-        }
-
-        if (result.length === 0) {
-            return res.status(401).json({ success: false, message: 'username or password is incorrect' });
-        }
-
-        req.session.loggedin = true;
-        req.session.username = username;
-        req.session.userId = result[0].id;
+    req.session.loggedin = true;
+    req.session.username = username;
+    req.session.userId = user.id;
+    
+    res.redirect('/');
         
-        res.redirect('/');
-        
-    });
+    
 };
 
 const get_register = (req, res) => {
