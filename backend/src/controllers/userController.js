@@ -31,7 +31,7 @@ const profile = async (req, res) => {
 
 const callApiFlash = async (req, res) => {
     try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+        const response = await fetch('http://flask:5000/hello');
         const data = await response.json();
         console.log('API response:', data);
         res.status(200).json({ success: true, data });

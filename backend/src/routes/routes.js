@@ -24,7 +24,7 @@ routes.get('/', function (req, res) {
                 <button type="submit">Profile</button>
             </form>
             <form action="/user/call-api-flash" method="get">
-                <button type="submit">Call API Flash</button>
+                <button type="submit">Call API Flask</button>
             </form>
             <form action="/user/logout" method="get">
                 <button type="submit">Logout</button>
