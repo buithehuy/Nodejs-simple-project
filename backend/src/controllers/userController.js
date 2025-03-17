@@ -29,10 +29,19 @@ const profile = async (req, res) => {
     }
 };
 
-const callApiFlash = async (req, res) => {
+const callApiFlask = async (req, res) => {
     try {
-        const response = await fetch('http://flask:5000/hello');
-        const data = await response.json();
+        const response = await fetch('http://flask:5000/hello', {
+            method : 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify({ username: req.session.username})
+        });
+        const text = await response.text();
+        console.log('Raw API response:', text);
+
+        const data = JSON.parse(text);
         console.log('API response:', data);
         res.status(200).json({ success: true, data });
     } catch (err) {
@@ -73,5 +82,5 @@ const logout = (req, res) => {
 }
 
 module.exports = {
-    profile, change_password, click_change_password, logout, callApiFlash
+    profile, change_password, click_change_password, logout, callApiFlask
 };

@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { register, login, get_register, get_login } = require('../controllers/authController');
-const { profile, change_password, click_change_password, logout, callApiFlash } = require('../controllers/userController');
+const { profile, change_password, click_change_password, logout, callApiFlask } = require('../controllers/userController');
 const { get_all_users } = require('../controllers/adminController');
 
 const routes = express.Router();
@@ -23,7 +23,7 @@ routes.get('/', function (req, res) {
             <form action="/user/profile" method="get">
                 <button type="submit">Profile</button>
             </form>
-            <form action="/user/call-api-flash" method="get">
+            <form action="/call-api-flash" method="post">
                 <button type="submit">Call API Flask</button>
             </form>
             <form action="/user/logout" method="get">
@@ -56,7 +56,7 @@ routes.post('/auth/register', register);
 routes.post('/auth/login', login);
 
 routes.get('/user/profile', requireLogin, profile);
-routes.get('/user/call-api-flash', requireLogin, callApiFlash);
+routes.post('/call-api-flash', requireLogin, callApiFlask);
 
 routes.get('/user/change-password', requireLogin, click_change_password);
 routes.post('/auth/change-password', requireLogin, change_password);
