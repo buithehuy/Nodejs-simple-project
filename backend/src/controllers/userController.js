@@ -29,6 +29,18 @@ const profile = async (req, res) => {
     }
 };
 
+const callApiFlash = async (req, res) => {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+        const data = await response.json();
+        console.log('API response:', data);
+        res.status(200).json({ success: true, data });
+    } catch (err) {
+        console.error('API error:', err);
+        return res.status(500).json({ success: false, message: 'API err' });
+    }
+}
+
 const change_password = async (req, res) => {
     const { password } = req.body;
     if (!password) {
@@ -61,5 +73,5 @@ const logout = (req, res) => {
 }
 
 module.exports = {
-    profile, change_password, click_change_password, logout
+    profile, change_password, click_change_password, logout, callApiFlash
 };
