@@ -1,0 +1,12 @@
+1. Tại sao Nginx ra đời
+    + Giải quyết vấn đề kết nối đồng thời và ít tốn tài nguyên hơn
+2. Master
+    + Tạo ra, giám sát Worker
+    + Không đụng đến việc xử lý request
+3. Worker
+    + Nhận và xử lý request từ client
+    + Có thể cùng lúc xử lý nhiều request nhờ kiến trúc bất đồng bộ
+        * Kiến trúc bất đồng bộ: Worker không chờ request xử lý xong mới nhận request mới
+        * Nhiều Worker thì có thể xử lý đươc nhiều request hơn nhưng đánh đổi lại là hao tài nguyên
+        * Mỗi Worker đều có giưới hạn về số lượng request mà nó có thể xử lý cùng lúc, nếu vượt quá giới hạn thì
+        request mới vào hàng đợi socket của hệ điều hành, nếu hàng đợi đầy, request bị từ chối

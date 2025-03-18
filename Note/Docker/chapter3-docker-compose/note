@@ -1,0 +1,24 @@
+1. Mở đầu
++ docker-compose - công cụ kết nối các container lại và làm chúng có thể tương tác với nhau
+2. Bài toán
+Tự động hóa việc build, liên kết các container lại với nhau
+3. Viết docker-compose
++ Phiên bản của docker-compose
+    - version: '3.5'
++ Liệt kê các service
+    mysql:
+        ...
+        ...
+    app:
+        ...
+        ...
++ Cài đặt cho từng service
+    * image: Chỉ định image để khởi động container
+    * container_name: Chỉ định container name tùy chỉnh
+    * volumes: Chia sẻ dữ liệu giữa container (máy ảo) và host (máy thật) hoặc giữa các container với nhau.
+        sao lưu dữ liệu ra ngoài máy host
+    * build: Sử dụng khi không xây dựng từ image có sẵn mã xây dựng từ docker file
+    * port: Cấu hình cổng kết nối
+        - HOST:CONTAINER : khi truy cập cổng HOST của máy thật thì sẽ được trỏ tới truy cập ở cổng CONTAINER
+    * environment: bổ sung các biến môi trường
+    

@@ -1,0 +1,34 @@
+1. Vì sao sử dụng:
++ Tránh tốn thời gian cài cắm nhiều thứ, tránh tốn tài nguyên máy, tránh xung đột,...
++ ...
+2. Quá trình hình thành
++ Containerlization (container hóa)
+    * truyền thống(Physical Server/OS/App) -> vitualization -> containerlization
++ Container là gì
+    * Ưu điểm: Tiện lợi, linh động, nhanh, nhẹ, đồng nhất, đóng gói
+    * Nhược điểm: Tính an toàn, 
+    * Sự khác nhau của VM và container:
+        - VM là một hệ điều hành riêng biệt
+        - container chỉ chia sẻ kernel
++ Docker ra đời
+    * Một công ty tiến hành public source code về công nghệ container rồi ra mắt sản phẩm Docker
+3. Cài đặt
+4. Nhược điểm khi sử dụng Mac với Windows, sẽ chậm hơn Linux (vì Linux open source), hạn chế về môi trương container hóa
+5. Hoạt động
++ Luồng: Dockerfile ---build--> Docker Image ---run--> Docker Container
++ Dockerfile
+    Văn bản chứa hướng dẫn để tạo docker image
++ Docker image
+    Những thành phần cần thiết để chạy container
++ Docker container
+    Môi trường chạy ứng dụng
+6. Các câu lệnh
++ Mục đích:
+    * Từ Dockerfile tạo Docker Image
+    * Từ Docker Image dựng lên Docker Container
++ Các câu lệnh docker image
+    * Pull image : docker pull <image_name>
+    * Liệt kê danh sách image: docker images
+    * Xóa image : docker rmi <image_name>
+    ...
++ Các câu lệnh cho Doker Container
