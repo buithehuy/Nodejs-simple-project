@@ -10,3 +10,11 @@
         * Nhiều Worker thì có thể xử lý đươc nhiều request hơn nhưng đánh đổi lại là hao tài nguyên
         * Mỗi Worker đều có giưới hạn về số lượng request mà nó có thể xử lý cùng lúc, nếu vượt quá giới hạn thì
         request mới vào hàng đợi socket của hệ điều hành, nếu hàng đợi đầy, request bị từ chối
+
+4. Other
+    + Khi pull nginx về từ docker thì có sẵn 1 file cấu hình mặc định trong container
+    + Xem log: docker exec -it my_nginx cat /etc/nginx/nginx.conf
+    + worker_processes: số lượng Worker
+        * Nếu để auto thì Nginx sẽ tự động chọn số lượng Worker phù hợp với số luồng CPU.
+        * Kiểm tra core và logical processor: wmic cpu get NumberOfCores, NumberOfLogicalProcessors
+    + worker_connections: số lượng request mà 1 Worker có thể xử lý cùng lúc
