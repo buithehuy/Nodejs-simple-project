@@ -1,0 +1,13 @@
+2.1. GETTING A GIT REPOSITORY
+1. Initializing a repository in an existing directory
+Có 2 cách để có một reposity Git
+    + Khởi tạo một repository trong thư mục hiện có
+    + Clone một repository đã tồn tại
+2. Khởi tạo repository trong thư mục hiện có
+Nếu có một thư mục dự án chưa được quản lý bởi Git, có thể khởi tạo git bằng lệnh:
+"git init"
+Điều này tạo một thư mục mới ".git" chứa toàn bộ dữ liệu quản lý phiên bản
+3. Clone một repositpry đã tồn tại
+git clone <url>
+
+2.2. Recording Changes to the Repository

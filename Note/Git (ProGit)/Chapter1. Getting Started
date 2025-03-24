@@ -1,0 +1,70 @@
+1.1. GETTING STARTED - ABOUT VERSION CONTROL
+1. About version control (kiểm soát phiên bản)
+is a system that record changes to a file or set of files overtime so that can recall specific version later.
+a. Local version control system (Hệ thống kiểm soát phiên bản cục bộ)
+Phương pháp mà nhiều người dùng là sao chép tệp vào một thư mục khác. Tuy nhiên, phương pháp
+này dễ xảy ra lỗi khi dễ dàng quên mình đang ở đâu và sao chép nhầm.
+=> Các lập trình viên giải quyết bằng cách:
+https://git-scm.com/book/en/v2/images/local.png
+lưu trữ thay đổi trong tệp vào cơ sở dữ liệu
+
+b. Centralized Version Control System (Hệ thống kiểm soát phiên bản tập trung)
+Để giải quyết vấn đề cộng tác với các nhà phát triển trên các hệ thống khác
+Các hệ thống này có một single server bao gồm các versioned files, và một số lượng máy khách check out files
+từ khu vực trung tâm
+
+Setup này mang lại nhiều ưu điểm,tuy nhiên cũng có một số nhược điểm nghiêm trọng:
+Nhược điểm rõ ràng nhấy là centralized server represents
+Nếu servr ngừng hoạt động thì không ai có thể lưu phiên bản làm việc, hoặc nếu ổ cứng chứa cơ sở dữ liệu bị hỏng thì không có
+bản sao lưu phù hợp, sẽ mất hoàn toàn mọi thứ
+Bất cứ khi nào lưu toàn bộ lịch sử dự án ở một nơi duy nhất => mất mọi thứ
+
+c. Distributed Version Control Systems (Hệ thống kiếm soát phiên bản phân tán)
+Trong các DVCS, các ,máy khách sao chép toàn bộ kho chứa(repoitory) => luôn có những bản sao đầy đủ của tất cả dữ liệu
+https://git-scm.com/book/en/v2/images/distributed.png
+
+DVCS còn giải quyết được bài toán quản lý kho từ xa, có thể cộng tác với nhiều nhóm khác nhau
+trong cùng dự án
+
+1.2. A SHORT HISTORY OF GIT
+Từ năm 2002, dự án phần mềm mã nguồn mở nhân của Linux sử dụng BitKeeper - một DVCS độc quyền
+năm 2005, cộng đồng phát triển nhân Linux và BitKeeper không hợp tác và BitKeeper không được cung cấp miễn phí nữa
+=> Thúc đẩy cộng đồng phát triển Linux phát triển Git dựa vào việc sử dụng BitKeeper
+
+1.3. WHAT IS GIT
+Điểm khác nhau cơ bản giữa Git và các VCS khác là cách Git nghĩ về dữ liệu
+Hầu hết các hệ thống khác lưu trữ tập tin dựa trên danh sách các thay đổi dựa trên tệp
+https://git-scm.com/book/en/v2/images/deltas.png
+Git sẽ xem dữ liệu của mình giống như tập hợp các "ảnh" của một hệ thống tệp tin.
+Mỗi lần lưu lại một trạng thái của dự án, Git sẽ ghi lại nội dung tất cả các tập tin tại thời điểm đó.
+Nếu như tập tin không có sự thay đổi nào, Git không lưu trữ tập tin đó lại mà chỉ tạo một
+liên kết gốc tới tập tin đã tồn tại trước đó
+https://git-scm.com/book/en/v2/images/snapshots.png
+
+a. Hầu hết các thao tác đều cục bộ
+Git không cần kết nối mạng để thực hiện hầu hết các thao tác vì toàn bộ lịch sử dự án được lưu trữ trên ổ đĩa cục bộ.
+Duyệt lịch sử dự án hay so sánh phiên bản tệp cũ có thể thực hiện ngay lập tức mà không cần truy vấn máy chủ.
+Người dùng có thể làm việc mà không cần kết nối mạng, khác với các hệ thống như Perforce, Subversion hay CVS.
+
+b. Git đảm bảo tính toàn vẹn của dữ liệu
+Git sử dụng cơ chế kiểm tra tính toàn vẹn bằng thuật toán bảng băm SHA-1
+Mỗi tệp hoặc thư mục đều có giá trị băm duy nhất, giúp Git phát hiện bất kỳ thay đổi nào kể cả khi tên tệp không đổi.
+
+c.Git hầu như chỉ thêm dữ liệu
+Hầu hết các thao tác trong Git đều chỉ thêm dữ liệu mà không làm mất dữ liệu cũ.
+Khi đã commit, dữ liệu gần như không thể mất, đặc biệt nếu bạn thường xuyên push lên repository từ xa.
+Điều này giúp người dùng dễ dàng thử nghiệm mà không lo làm hỏng toàn bộ dự án.
+
+d. Ba trạng thái chính của Git
+Modified: Tệp đã thay đổi nhưng chưa được đánh dấu để commit.
+Staged: Tệp đã thay đổi và được đánh dấu để đưa vào commit tiếp theo.
+Committed: Dữ liệu đã được lưu an toàn vào cơ sở dữ liệu Git.
+
+e. Ba thành phần chính của một dự án Git
+Working tree: Thư mục làm việc chứa các tệp đang chỉnh sửa.
+Staging area: Khu vực đánh dấu các tệp sẽ được commit.
+Git directory: Kho lưu trữ dữ liệu và lịch sử của dự án.
+
+1.4. THE COMMAND LINE
+1.5. INSTALLING GIT
+1.6. FIRST-TIME GIT SETUP
