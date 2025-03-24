@@ -31,7 +31,7 @@ const profile = async (req, res) => {
 
 const callApiFlask = async (req, res) => {
     try {
-        const response = await fetch('http://flask:5000/hello', {
+        const response = await fetch('http://flask:5000/message', {
             method : 'POST',
             headers: {
                 "Content-Type": 'application/json'

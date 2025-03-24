@@ -4,6 +4,8 @@ services:
     container_name: flask
     ports:
       - "5000:5000"
+    volumes:
+      - ./Flask:/app
   mysql:
     image: mysql:8.0
     container_name: mysql

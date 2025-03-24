@@ -1,4 +1,5 @@
 const connection = require('../config/db');
+const path = require('path');
 const bcrypt = require('bcryptjs');
 
 const register = async (req, res) => {
@@ -49,35 +50,12 @@ const login = async (req, res) => {
 };
 
 const get_register = (req, res) => {
-    res.send(`
-    <h1>Register</h1>
-    <form action="/auth/register" method="post">
-      <input type="text" name="username" placeholder="username" required><br>
-      <input type="password" name="password" placeholder="password" required><br>
-      <button type="submit">Register</button>
-    </form>
-    <form>
-    <h2>Already have an account?</h2>
-    <a href="/user/login">Login</a>
-    </form>
-
-  `);
+    res.sendFile(path.join(__dirname, '../templates/register.html'));
  }
 
 const get_login = function (req, res) {
-    res.send(`
-    <h1>Login</h1>
-    <form action="/auth/login" method="post">
-      <input type="text" name="username" placeholder="username" required><br>
-      <input type="password" name="password" placeholder="password" required><br>
-      <button type="submit">Login</button>
-    </form>
-    <form>
-    <h2>Don't have an account?</h2>
-    <a href="/user/register">Register</a>
-    </form>
-  `);
- }
+    res.sendFile(path.join(__dirname, '../templates/login.html'));
+}
 
 
 module.exports = {
