@@ -40,4 +40,23 @@ g. Viewing Staged and Unstaged Changes
 Biết chính xác những tệp đã thay đổi
 
 h. Commit changes
+i. Skipping the Staging Area 
+"git commit -a -m"
+k. Removing files
++ Nếu chỉ xóa tệp mà không dùng "git rm", Git sẽ coi nó là thay đổi chưa được stage
+"rm abcd.txt"
++ Để xóa tệp và stage ngay lập tức
+"git rm abcd.txt"
++ Xóa khỏi Git (bỏ theo dõi) nhưng muốn giữ lại trên ổ đĩa
+"git rm --cached abcd.txt" => hữu ích khi quên thêm tệp vào .gitignore nhưng lỡ stage
 
+2.3. VIEWING THE COMMIT HISTORY
+"git log"
+Hiển thị sự khác biệt mỗi lần commit 
+"git log -p"
+...
+
+2.4. Undoing Things
+a. Giới thiệu
++ Trong git, có nhiều cách để hoàn tác thay đổi, một số thao tác có thể làm mất dữ liệu nếu không cẩn thận
++ Khi commit quá sớm hoặc sai sót (quên thêm file, sai commit message), có thể sửa bằng git commit --amend
