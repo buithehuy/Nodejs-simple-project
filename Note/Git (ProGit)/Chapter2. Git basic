@@ -11,3 +11,33 @@ Nếu có một thư mục dự án chưa được quản lý bởi Git, có th�
 git clone <url>
 
 2.2. Recording Changes to the Repository
+a. Mỗi file trong thư mục làm việc có thể thuộc một trong 2 loại:
++ Tracked (Được theo dõi): Git đã biết về file này, nó có thể ở trạng thái unmodified, modified, hoặc stage(đang chờ commit)
++ Untracked (Chưa theo dõi):File chưa từng được lưu vào Git trước đó
+
+Khi clone một repo, tất cả các file ban đầu đều là tracked và unmodified. Khi chỉnh sửa, Git nhận diện
+file là modified. Để lưu thay đổi, cần đưa file vào vùng chờ (staging) và commit nó.
+
+b. Kiểm tra trạng thái file
+Dùng git status để kiểm tra trạng thái file
+
+c. Thêm file mới vào Git
+Giả sử tạo một file mới 
+Git sẽ hiển thị file đó trong danh sách Untracked files, tức là Git chưa theo dõi file này.
+
+Để bắt đầu theo dõi file dùng "git add _ "
+
+d. Staging Modified Files
+Sau khi "git add mà thay đổi thì sau khi commit, sẽ commit phần đã add 
+
+e. Short Status
+"git status -s"
+
+f. Ignoring Files
+
+g. Viewing Staged and Unstaged Changes
+"git diff"
+Biết chính xác những tệp đã thay đổi
+
+h. Commit changes
+
