@@ -60,3 +60,11 @@ Hiển thị sự khác biệt mỗi lần commit
 a. Giới thiệu
 + Trong git, có nhiều cách để hoàn tác thay đổi, một số thao tác có thể làm mất dữ liệu nếu không cẩn thận
 + Khi commit quá sớm hoặc sai sót (quên thêm file, sai commit message), có thể sửa bằng git commit --amend
+b. Sửa commmit mới nhất
+
+2.5. Working with remotes
+
+2.6. Tagging
+
+2.7. Git Aliases
+Tạo biệt danh cho lệnh
