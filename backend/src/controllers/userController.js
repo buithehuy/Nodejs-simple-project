@@ -1,5 +1,10 @@
+require('dotenv').config();
+
+const apikey1 = process.env.API_KEY_1
+const path = require('path');
 const connection = require('../config/db');
 const bcrypt = require('bcryptjs');
+
 
 const profile = async (req, res) => {
     try {
@@ -28,6 +33,27 @@ const profile = async (req, res) => {
         return res.status(500).json({ success: false, message: 'database err' });
     }
 };
+
+const callAPIWeather = async (req, res) => {
+    try {
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Hanoi&appid=${apikey1}`)
+        const text = await response.text();
+        console.log('Raw API response:', text);
+
+        const data = JSON.parse(text);
+        console.log('API response:', data);
+        res.send(`
+            <h1>Weather in ${data.name}</h1>
+            <p>Temperature: ${(data.main.temp - 273.15).toFixed(0)}</p>
+            <p>Date: ${new Date((data.dt + data.timezone) * 1000).toLocaleString()} </p>
+
+        `)
+    } catch (err) {
+        console.error('API error:', err);
+        return res.status(500).json({ success: false, message: 'API err' });
+    }
+}
+
 
 const callApiFlask = async (req, res) => {
     try {
@@ -82,5 +108,5 @@ const logout = (req, res) => {
 }
 
 module.exports = {
-    profile, change_password, click_change_password, logout, callApiFlask
+    profile, change_password, click_change_password, logout, callApiFlask, callAPIWeather
 };

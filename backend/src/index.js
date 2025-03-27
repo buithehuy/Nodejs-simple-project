@@ -1,6 +1,5 @@
 
 const express = require('express');
-
 const connection = require('./config/db');
 
 const bodyParser = require('body-parser');
@@ -10,7 +9,6 @@ const routes = require('./routes/routes');
 
 const app = express();
 const port = 8081;
-
 
 
 app.use(session({
